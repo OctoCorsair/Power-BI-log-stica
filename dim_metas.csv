@@ -1,0 +1,11 @@
+indicador,meta,limite_alerta,melhor_quando
+OTIF,0.92,0.85,maior
+No Prazo,0.95,0.90,maior
+Completas,0.98,0.95,maior
+Avaria,0.005,0.010,menor
+Custo por Km,3.10,3.40,menor
+Utilização da Carga,0.75,0.65,maior
+Atraso de Trânsito,20,30,menor
+Margem,0.12,0.06,maior
+Consumo,3.10,2.80,maior
+Ocorrências por 100 Viagens,25,35,menor

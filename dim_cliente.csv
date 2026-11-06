@@ -1,0 +1,121 @@
+cliente_id,cliente_nome,cidade,uf,segmento,prioridade,latitude,longitude
+C001,Loja Virtual Monte Azul,Ribeirão Preto,SP,E-commerce,B,-21.18083,-47.78363
+C002,Farma Horizonte,Rio de Janeiro,RJ,Farmacêutico,B,-22.95344,-43.19389
+C003,Drogaria Tropical,São Paulo,SP,Farmacêutico,B,-23.52199,-46.63178
+C004,Drogaria Santa Clara,Piracicaba,SP,Farmacêutico,C,-22.72739,-47.69277
+C005,Mega Store Paulista,Bauru,SP,E-commerce,A,-22.29984,-49.09597
+C006,Drogaria Central,Santo André,SP,Farmacêutico,A,-23.66564,-46.49998
+C007,Atacadão Liberdade,Rio de Janeiro,RJ,Varejo,A,-22.95233,-43.16826
+C008,Click Paulista,Guarulhos,SP,E-commerce,A,-23.47296,-46.52499
+C009,Laboratório Estrela,Mogi das Cruzes,SP,Farmacêutico,B,-23.5252,-46.22518
+C010,Distribuidora Vale Verde,Mogi das Cruzes,SP,Alimentício,B,-23.53072,-46.22229
+C011,Têxtil Vale Verde,Araraquara,SP,Indústria,B,-21.7639,-48.1736
+C012,Fundição Aurora,São José dos Campos,SP,Indústria,C,-23.23477,-45.94356
+C013,Loja Virtual Aurora,Curitiba,PR,E-commerce,B,-25.44562,-49.29293
+C014,Loja Virtual União,Osasco,SP,E-commerce,C,-23.52574,-46.76121
+C015,Plásticos Santa Clara,Belo Horizonte,MG,Indústria,B,-19.92082,-43.96117
+C016,Auto Center Horizonte,Campinas,SP,Autopeças,B,-22.94035,-47.02045
+C017,Mercado Tropical,Rio de Janeiro,RJ,Varejo,C,-22.89271,-43.17452
+C018,Auto Center Estrela,Curitiba,PR,Autopeças,B,-25.45653,-49.23503
+C019,Plásticos Ipiranga,Osasco,SP,Indústria,B,-23.54036,-46.80029
+C020,Magazine Nova Era,Sorocaba,SP,Varejo,A,-23.53403,-47.45621
+C021,Farma Tropical,Guarulhos,SP,Farmacêutico,A,-23.45237,-46.53884
+C022,Distribuidora Monte Azul,Curitiba,PR,Alimentício,C,-25.39361,-49.30017
+C023,Magazine Ouro Verde,Campinas,SP,Varejo,B,-22.88157,-47.02765
+C024,Auto Center Aurora,Jundiaí,SP,Autopeças,B,-23.22002,-46.8916
+C025,Distribuidora Jaguar,Campinas,SP,Alimentício,A,-22.8883,-47.05702
+C026,Distribuidora Nova Era,Campinas,SP,Alimentício,B,-22.89287,-47.09934
+C027,Loja Virtual Santa Clara,Ribeirão Preto,SP,E-commerce,A,-21.15905,-47.78439
+C028,Auto Center Dom Pedro,Curitiba,PR,Autopeças,B,-25.45072,-49.23956
+C029,Mega Store Ipiranga,Mogi das Cruzes,SP,E-commerce,B,-23.56621,-46.19714
+C030,Mega Store Aurora,São Paulo,SP,E-commerce,A,-23.57698,-46.65231
+C031,Empório Ouro Verde,Belo Horizonte,MG,Varejo,C,-19.90597,-43.91903
+C032,Padaria Real,Ribeirão Preto,SP,Alimentício,B,-21.20594,-47.81403
+C033,Auto Center Paulista,São Paulo,SP,Autopeças,C,-23.53236,-46.59093
+C034,Farma Paulista,São Paulo,SP,Farmacêutico,A,-23.52898,-46.59546
+C035,Click Ouro Verde,São Paulo,SP,E-commerce,B,-23.50467,-46.60332
+C036,Empório Santa Clara,Taubaté,SP,Varejo,B,-22.9801,-45.55168
+C037,Loja Virtual Horizonte,São José dos Campos,SP,E-commerce,A,-23.17399,-45.93469
+C038,Mercado Bandeirante,Rio de Janeiro,RJ,Varejo,A,-22.9214,-43.15811
+C039,Retífica Aurora,Franca,SP,Autopeças,B,-20.57597,-47.40937
+C040,Laboratório Liberdade,Bauru,SP,Farmacêutico,C,-22.35625,-49.13426
+C041,Peças Horizonte,Mogi das Cruzes,SP,Autopeças,B,-23.547,-46.22353
+C042,Mercado Monte Azul,Piracicaba,SP,Varejo,B,-22.73351,-47.60335
+C043,Metalúrgica Ipiranga,São Carlos,SP,Indústria,B,-21.99368,-47.84477
+C044,Frigorífico Ouro Verde,Guarulhos,SP,Alimentício,B,-23.42885,-46.55155
+C045,Auto Center Liberdade,Santos,SP,Autopeças,B,-23.91378,-46.31569
+C046,Fundição Paulista,Osasco,SP,Indústria,C,-23.55965,-46.75879
+C047,Loja Virtual Paulista,Jundiaí,SP,E-commerce,B,-23.172,-46.89292
+C048,Laboratório Atlântica,Sorocaba,SP,Farmacêutico,B,-23.53567,-47.46155
+C049,Drogaria Paulista,Limeira,SP,Farmacêutico,C,-22.53119,-47.38147
+C050,Atacadão Central,Limeira,SP,Varejo,B,-22.56003,-47.4252
+C051,Peças Dom Pedro,São Paulo,SP,Autopeças,C,-23.59866,-46.66159
+C052,Peças Nova Era,Santos,SP,Autopeças,B,-23.91525,-46.34554
+C053,Distribuidora Ipiranga,Sorocaba,SP,Alimentício,C,-23.54101,-47.48841
+C054,Farma Nova Era,Piracicaba,SP,Farmacêutico,A,-22.71603,-47.62048
+C055,Têxtil Nova Era,Campinas,SP,Indústria,B,-22.92418,-47.01532
+C056,Metalúrgica Pioneira,São Paulo,SP,Indústria,B,-23.50658,-46.64773
+C057,Padaria Vale Verde,Campinas,SP,Alimentício,A,-22.92843,-47.09813
+C058,Mercado Vale Verde,Santos,SP,Varejo,B,-23.94036,-46.30692
+C059,Mega Store Jaguar,Santo André,SP,E-commerce,B,-23.66375,-46.56838
+C060,Empório União,Campinas,SP,Varejo,A,-22.87618,-47.10529
+C061,Click Nova Era,Rio de Janeiro,RJ,E-commerce,B,-22.92202,-43.13195
+C062,Atacadão Paulista,Jundiaí,SP,Varejo,B,-23.19011,-46.88927
+C063,Mercado Central,Araraquara,SP,Varejo,C,-21.7669,-48.19907
+C064,Auto Center Ipiranga,São José dos Campos,SP,Autopeças,B,-23.22307,-45.91773
+C065,Peças União,Guarulhos,SP,Autopeças,B,-23.48663,-46.50266
+C066,Têxtil Paulista,Santo André,SP,Indústria,B,-23.64338,-46.55504
+C067,Fundição Atlântica,Taubaté,SP,Indústria,B,-23.05764,-45.57914
+C068,Empório Monte Azul,Sorocaba,SP,Varejo,C,-23.50706,-47.48806
+C069,Retífica Liberdade,São Paulo,SP,Autopeças,B,-23.58615,-46.60606
+C070,Mega Store Atlântica,São José dos Campos,SP,E-commerce,B,-23.23358,-45.94873
+C071,Retífica Santa Clara,São Paulo,SP,Autopeças,B,-23.53258,-46.59101
+C072,Peças Jaguar,Belo Horizonte,MG,Autopeças,B,-19.90188,-43.9785
+C073,Laboratório Ipiranga,Ribeirão Preto,SP,Farmacêutico,A,-21.17161,-47.83508
+C074,Click Pioneira,Ribeirão Preto,SP,E-commerce,B,-21.14968,-47.81271
+C075,Farma Aurora,Ribeirão Preto,SP,Farmacêutico,A,-21.20551,-47.84822
+C076,Loja Virtual Tropical,Santos,SP,E-commerce,B,-23.94852,-46.34666
+C077,Distribuidora Aurora,Ribeirão Preto,SP,Alimentício,C,-21.21192,-47.76307
+C078,Drogaria Pioneira,Campinas,SP,Farmacêutico,B,-22.88935,-47.10417
+C079,Laboratório Vale Verde,Belo Horizonte,MG,Farmacêutico,B,-19.91078,-43.97369
+C080,Mega Store Bandeirante,Limeira,SP,E-commerce,A,-22.54127,-47.35285
+C081,Laboratório Ouro Verde,São Paulo,SP,Farmacêutico,B,-23.56872,-46.63533
+C082,Farma Monte Azul,Santo André,SP,Farmacêutico,A,-23.6747,-46.59102
+C083,Mega Store Tropical,São Paulo,SP,E-commerce,A,-23.57314,-46.59908
+C084,Farma Jaguar,Sorocaba,SP,Farmacêutico,B,-23.47001,-47.41631
+C085,Peças Vale Verde,Guarulhos,SP,Autopeças,B,-23.42772,-46.55344
+C086,Laboratório Central,São Paulo,SP,Farmacêutico,C,-23.50305,-46.62372
+C087,Farma Ouro Verde,São Carlos,SP,Farmacêutico,B,-22.05089,-47.8847
+C088,Fundição Dom Pedro,São Paulo,SP,Indústria,C,-23.50254,-46.68041
+C089,Plásticos Vale Verde,Santos,SP,Indústria,B,-23.92467,-46.30602
+C090,Retífica Estrela,Santo André,SP,Autopeças,B,-23.63964,-46.56062
+C091,Retífica Horizonte,Franca,SP,Autopeças,B,-20.53469,-47.4357
+C092,Distribuidora Estrela,Osasco,SP,Alimentício,C,-23.56977,-46.76011
+C093,Peças Bandeirante,Bauru,SP,Autopeças,C,-22.28806,-49.10906
+C094,Loja Virtual Estrela,Franca,SP,E-commerce,B,-20.53457,-47.41523
+C095,Drogaria Ipiranga,Jundiaí,SP,Farmacêutico,B,-23.16056,-46.87981
+C096,Laboratório Pioneira,Bauru,SP,Farmacêutico,B,-22.31999,-49.1342
+C097,Têxtil Horizonte,Araraquara,SP,Indústria,A,-21.77666,-48.18492
+C098,Loja Virtual Vale Verde,São Carlos,SP,E-commerce,A,-22.05794,-47.93143
+C099,Frigorífico Aurora,Santos,SP,Alimentício,A,-23.99167,-46.30195
+C100,Laboratório Santa Clara,São Paulo,SP,Farmacêutico,A,-23.51632,-46.65919
+C101,Retífica Jaguar,Taubaté,SP,Autopeças,B,-23.01681,-45.51886
+C102,Retífica Tropical,Piracicaba,SP,Autopeças,C,-22.7048,-47.60236
+C103,Peças Tropical,Osasco,SP,Autopeças,C,-23.527,-46.79352
+C104,Plásticos Dom Pedro,São José dos Campos,SP,Indústria,C,-23.23831,-45.883
+C105,Auto Center Jaguar,Guarulhos,SP,Autopeças,B,-23.48537,-46.4885
+C106,Drogaria Horizonte,Ribeirão Preto,SP,Farmacêutico,C,-21.16268,-47.76893
+C107,Mega Store Vale Verde,Rio de Janeiro,RJ,E-commerce,B,-22.92949,-43.18748
+C108,Metalúrgica Estrela,São Paulo,SP,Indústria,B,-23.50353,-46.6377
+C109,Distribuidora Atlântica,Piracicaba,SP,Alimentício,A,-22.70548,-47.64318
+C110,Click Central,Bauru,SP,E-commerce,B,-22.34001,-49.0545
+C111,Distribuidora Dom Pedro,Santo André,SP,Alimentício,C,-23.69402,-46.58515
+C112,Magazine Atlântica,Rio de Janeiro,RJ,Varejo,A,-22.87689,-43.14288
+C113,Laboratório União,Guarulhos,SP,Farmacêutico,B,-23.48899,-46.55146
+C114,Mercado Real,Mogi das Cruzes,SP,Varejo,A,-23.51902,-46.21281
+C115,Mercado Pioneira,Mogi das Cruzes,SP,Varejo,B,-23.49926,-46.15265
+C116,Click Estrela,Araraquara,SP,E-commerce,B,-21.79762,-48.19337
+C117,Farma Liberdade,São José dos Campos,SP,Farmacêutico,B,-23.18886,-45.90901
+C118,Drogaria Dom Pedro,Curitiba,PR,Farmacêutico,B,-25.41934,-49.27502
+C119,Magazine Jaguar,Osasco,SP,Varejo,B,-23.5795,-46.79516
+C120,Têxtil Liberdade,Belo Horizonte,MG,Indústria,C,-19.93531,-43.9078

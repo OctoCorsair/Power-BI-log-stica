@@ -1,0 +1,32 @@
+// ============================================================================
+// TABELAS CALCULADAS
+// Crie cada uma em: Modelagem > Nova tabela
+// ============================================================================
+
+// 1) Tabela que guarda todas as medidas (depois oculte a coluna "Value")
+_Medidas = { BLANK () }
+
+
+// 2) Calendário (marque como tabela de datas: Ferramentas de tabela > Marcar como tabela de datas > Data)
+dCalendario =
+VAR _ini = DATE ( YEAR ( MIN ( fViagens[data_saida_data] ) ), 1, 1 )
+VAR _fim = DATE ( YEAR ( MAX ( fViagens[data_saida_data] ) ), 12, 31 )
+RETURN
+    SELECTCOLUMNS (
+        CALENDAR ( _ini, _fim ),
+        "Data", [Date],
+        "Ano", YEAR ( [Date] ),
+        "MesNum", MONTH ( [Date] ),
+        "Mês", FORMAT ( [Date], "mmm", "pt-BR" ),
+        "AnoMês", FORMAT ( [Date], "yyyy-mm" ),
+        "Mês/Ano", FORMAT ( [Date], "mmm/yy", "pt-BR" ),
+        "Trimestre", "T" & ROUNDUP ( MONTH ( [Date] ) / 3, 0 ),
+        "DiaSemanaNum", WEEKDAY ( [Date], 2 ),
+        "DiaSemana", FORMAT ( [Date], "ddd", "pt-BR" ),
+        "FimDeSemana", IF ( WEEKDAY ( [Date], 2 ) > 5, "Sim", "Não" )
+    )
+
+// Depois de criar, defina "Classificar por coluna":
+//   Mês        -> MesNum
+//   Mês/Ano    -> AnoMês
+//   DiaSemana  -> DiaSemanaNum

@@ -1,0 +1,185 @@
+// ============================================================================
+// MEDIDAS DO DASHBOARD DE LOGÍSTICA E TRÁFEGO
+//
+// Como usar (Power BI Desktop, modo de exibição "Consulta DAX"):
+//   1. Crie antes a tabela _Medidas (arquivo 00_tabelas_calculadas.dax).
+//   2. Cole todo este arquivo na Consulta DAX.
+//   3. Clique em "Atualizar modelo com alterações" para criar todas as medidas.
+// Se sua versão não tiver esse botão, crie as medidas uma a uma em "Nova medida".
+//
+// Depois, formate (selecione várias medidas de uma vez no Modo Modelo):
+//   inteiros: #,0 · percentuais: 0.0% · reais: R$ #,0.00 · decimais: #,0.0
+// ============================================================================
+DEFINE
+
+// ------------------------------- 01 Operação --------------------------------
+MEASURE _Medidas[Viagens] = COUNTROWS ( fViagens )
+MEASURE _Medidas[Entregas] = COUNTROWS ( fEntregas )
+MEASURE _Medidas[Km Rodados] = SUM ( fViagens[km_real] )
+MEASURE _Medidas[Km Planejados] = SUM ( fViagens[km_planejado] )
+MEASURE _Medidas[Desvio de Rota %] = DIVIDE ( [Km Rodados] - [Km Planejados], [Km Planejados] )
+MEASURE _Medidas[Carga Transportada (t)] = DIVIDE ( SUM ( fViagens[carga_kg] ), 1000 )
+MEASURE _Medidas[Veículos em Operação] = DISTINCTCOUNT ( fViagens[veiculo_id] )
+MEASURE _Medidas[Motoristas em Operação] = DISTINCTCOUNT ( fViagens[motorista_id] )
+MEASURE _Medidas[Entregas por Viagem] = DIVIDE ( [Entregas], [Viagens] )
+MEASURE _Medidas[Utilização da Carga %] =
+    DIVIDE ( SUM ( fViagens[carga_kg] ), SUM ( fViagens[capacidade_kg] ) )
+MEASURE _Medidas[Horas em Rota] = SUM ( fViagens[duracao_real_h] )
+MEASURE _Medidas[Velocidade Média (km/h)] = DIVIDE ( [Km Rodados], [Horas em Rota] )
+MEASURE _Medidas[Índice de Tempo (Real/Plan)] =
+    DIVIDE ( SUM ( fViagens[duracao_real_h] ), SUM ( fViagens[duracao_planejada_h] ) )
+
+// ---------------------------- 02 Nível de serviço ----------------------------
+MEASURE _Medidas[Entregas No Prazo] =
+    CALCULATE ( COUNTROWS ( fEntregas ), fEntregas[no_prazo] = 1 )
+MEASURE _Medidas[Entregas Atrasadas] = [Entregas] - [Entregas No Prazo]
+MEASURE _Medidas[% No Prazo] = DIVIDE ( [Entregas No Prazo], [Entregas] )
+MEASURE _Medidas[Entregas Completas] =
+    CALCULATE ( COUNTROWS ( fEntregas ), fEntregas[completa] = 1 )
+MEASURE _Medidas[% Completas] = DIVIDE ( [Entregas Completas], [Entregas] )
+MEASURE _Medidas[Entregas OTIF] =
+    CALCULATE ( COUNTROWS ( fEntregas ), fEntregas[no_prazo] = 1, fEntregas[completa] = 1 )
+MEASURE _Medidas[OTIF %] = DIVIDE ( [Entregas OTIF], [Entregas] )
+MEASURE _Medidas[Entregas com Avaria] =
+    CALCULATE ( COUNTROWS ( fEntregas ), fEntregas[avaria] = 1 )
+MEASURE _Medidas[Taxa de Avaria %] = DIVIDE ( [Entregas com Avaria], [Entregas] )
+MEASURE _Medidas[% Primeira Tentativa] =
+    DIVIDE ( CALCULATE ( COUNTROWS ( fEntregas ), fEntregas[tentativas] = 1 ), [Entregas] )
+MEASURE _Medidas[Atraso Médio das Atrasadas (min)] =
+    CALCULATE ( AVERAGE ( fEntregas[atraso_min] ), fEntregas[no_prazo] = 0 )
+MEASURE _Medidas[Receita de Frete] = SUM ( fEntregas[valor_frete] )
+
+// -------------------------------- 03 Tráfego ---------------------------------
+MEASURE _Medidas[Ocorrências] = COUNTROWS ( fOcorrencias )
+MEASURE _Medidas[Ocorrências por 100 Viagens] = DIVIDE ( [Ocorrências], [Viagens] ) * 100
+MEASURE _Medidas[Ocorrências Graves] =
+    CALCULATE ( COUNTROWS ( fOcorrencias ), fOcorrencias[gravidade] = "Alta" )
+MEASURE _Medidas[Panes Mecânicas] =
+    CALCULATE ( COUNTROWS ( fOcorrencias ), fOcorrencias[tipo] = "Pane mecânica" )
+MEASURE _Medidas[Tempo Parado (h)] = DIVIDE ( SUM ( fOcorrencias[duracao_min] ), 60 )
+MEASURE _Medidas[Atraso de Trânsito Médio (min)] = AVERAGE ( fViagens[atraso_transito_min] )
+MEASURE _Medidas[Atraso de Trânsito Total (h)] =
+    DIVIDE ( SUM ( fViagens[atraso_transito_min] ), 60 )
+MEASURE _Medidas[Viagens com Atraso > 30 min] =
+    CALCULATE ( COUNTROWS ( fViagens ), fViagens[atraso_transito_min] > 30 )
+MEASURE _Medidas[% Viagens com Atraso > 30 min] =
+    DIVIDE ( [Viagens com Atraso > 30 min], [Viagens] )
+MEASURE _Medidas[Ocorrência Mais Frequente] =
+    VAR _tabela =
+        ADDCOLUMNS (
+            VALUES ( fOcorrencias[tipo] ),
+            "@qtd", CALCULATE ( COUNTROWS ( fOcorrencias ) )
+        )
+    VAR _top = TOPN ( 1, _tabela, [@qtd], DESC )
+    RETURN
+        MAXX ( _top, fOcorrencias[tipo] )
+
+// --------------------------------- 04 Custos ---------------------------------
+MEASURE _Medidas[Custo Combustível] = SUM ( fViagens[custo_combustivel] )
+MEASURE _Medidas[Custo Pedágio] = SUM ( fViagens[custo_pedagio] )
+MEASURE _Medidas[Custo Manutenção] = SUM ( fViagens[custo_manutencao] )
+MEASURE _Medidas[Custo Motorista] = SUM ( fViagens[custo_motorista] )
+MEASURE _Medidas[Custo Ocorrências] = SUM ( fOcorrencias[custo_adicional] )
+MEASURE _Medidas[Custo Total] =
+    [Custo Combustível] + [Custo Pedágio] + [Custo Manutenção] + [Custo Motorista]
+        + [Custo Ocorrências]
+MEASURE _Medidas[Custo por Km] = DIVIDE ( [Custo Total], [Km Rodados] )
+MEASURE _Medidas[Custo por Entrega] = DIVIDE ( [Custo Total], [Entregas] )
+MEASURE _Medidas[Custo por Tonelada] = DIVIDE ( [Custo Total], [Carga Transportada (t)] )
+MEASURE _Medidas[Custo de Manutenção por Km] = DIVIDE ( [Custo Manutenção], [Km Rodados] )
+MEASURE _Medidas[Litros Consumidos] = SUM ( fViagens[litros_combustivel] )
+MEASURE _Medidas[Consumo Médio (km/L)] = DIVIDE ( [Km Rodados], [Litros Consumidos] )
+MEASURE _Medidas[Preço Médio do Diesel (R$/L)] = DIVIDE ( [Custo Combustível], [Litros Consumidos] )
+MEASURE _Medidas[Margem Operacional (R$)] = [Receita de Frete] - [Custo Total]
+MEASURE _Medidas[Margem %] = DIVIDE ( [Margem Operacional (R$)], [Receita de Frete] )
+
+// ----------------------- 05 Comparações no tempo ------------------------------
+// Exigem a tabela dCalendario marcada como tabela de datas.
+MEASURE _Medidas[Entregas Mês Anterior] =
+    CALCULATE ( [Entregas], DATEADD ( dCalendario[Data], -1, MONTH ) )
+MEASURE _Medidas[Var. Entregas vs Mês Anterior %] =
+    DIVIDE ( [Entregas] - [Entregas Mês Anterior], [Entregas Mês Anterior] )
+MEASURE _Medidas[OTIF % Mês Anterior] =
+    CALCULATE ( [OTIF %], DATEADD ( dCalendario[Data], -1, MONTH ) )
+MEASURE _Medidas[Var. OTIF vs Mês Anterior (p.p.)] =
+    IF ( ISBLANK ( [OTIF % Mês Anterior] ), BLANK (), ( [OTIF %] - [OTIF % Mês Anterior] ) * 100 )
+MEASURE _Medidas[Custo por Km Mês Anterior] =
+    CALCULATE ( [Custo por Km], DATEADD ( dCalendario[Data], -1, MONTH ) )
+MEASURE _Medidas[Var. Custo por Km vs Mês Anterior %] =
+    DIVIDE ( [Custo por Km] - [Custo por Km Mês Anterior], [Custo por Km Mês Anterior] )
+MEASURE _Medidas[Entregas Ano Anterior] =
+    CALCULATE ( [Entregas], SAMEPERIODLASTYEAR ( dCalendario[Data] ) )
+MEASURE _Medidas[Var. Entregas vs Ano Anterior %] =
+    DIVIDE ( [Entregas] - [Entregas Ano Anterior], [Entregas Ano Anterior] )
+MEASURE _Medidas[Entregas YTD] = TOTALYTD ( [Entregas], dCalendario[Data] )
+MEASURE _Medidas[Entregas Média Móvel 7d] =
+    AVERAGEX ( DATESINPERIOD ( dCalendario[Data], MAX ( dCalendario[Data] ), -7, DAY ), [Entregas] )
+
+// ---------------------------- 06 Metas e semáforos -----------------------------
+// As metas ficam na tabela dMetas (editável sem mexer em DAX).
+// Cores: verde #3DD598 · amarelo #F5A623 · vermelho #E5484D · cinza #8FA3BF
+MEASURE _Medidas[Meta OTIF] = CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "OTIF" )
+MEASURE _Medidas[Meta % No Prazo] = CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "No Prazo" )
+MEASURE _Medidas[Meta Custo por Km] =
+    CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Custo por Km" )
+MEASURE _Medidas[Meta Taxa de Avaria] = CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Avaria" )
+MEASURE _Medidas[Meta Utilização da Carga] =
+    CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Utilização da Carga" )
+MEASURE _Medidas[Meta Atraso de Trânsito] =
+    CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Atraso de Trânsito" )
+MEASURE _Medidas[Meta Margem] = CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Margem" )
+MEASURE _Medidas[Meta Consumo] = CALCULATE ( MAX ( dMetas[meta] ), dMetas[indicador] = "Consumo" )
+
+// "Maior é melhor": verde se atingiu a meta, amarelo se acima do limite de alerta.
+MEASURE _Medidas[Cor OTIF] =
+    VAR _v = [OTIF %]
+    VAR _m = [Meta OTIF]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "OTIF" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v >= _m, "#3DD598", IF ( _v >= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor % No Prazo] =
+    VAR _v = [% No Prazo]
+    VAR _m = [Meta % No Prazo]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "No Prazo" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v >= _m, "#3DD598", IF ( _v >= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor Utilização da Carga] =
+    VAR _v = [Utilização da Carga %]
+    VAR _m = [Meta Utilização da Carga]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Utilização da Carga" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v >= _m, "#3DD598", IF ( _v >= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor Margem] =
+    VAR _v = [Margem %]
+    VAR _m = [Meta Margem]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Margem" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v >= _m, "#3DD598", IF ( _v >= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor Consumo] =
+    VAR _v = [Consumo Médio (km/L)]
+    VAR _m = [Meta Consumo]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Consumo" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v >= _m, "#3DD598", IF ( _v >= _a, "#F5A623", "#E5484D" ) ) )
+
+// "Menor é melhor": verde se ficou abaixo da meta, amarelo se abaixo do limite de alerta.
+MEASURE _Medidas[Cor Custo por Km] =
+    VAR _v = [Custo por Km]
+    VAR _m = [Meta Custo por Km]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Custo por Km" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v <= _m, "#3DD598", IF ( _v <= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor Taxa de Avaria] =
+    VAR _v = [Taxa de Avaria %]
+    VAR _m = [Meta Taxa de Avaria]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Avaria" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v <= _m, "#3DD598", IF ( _v <= _a, "#F5A623", "#E5484D" ) ) )
+MEASURE _Medidas[Cor Atraso de Trânsito] =
+    VAR _v = [Atraso de Trânsito Médio (min)]
+    VAR _m = [Meta Atraso de Trânsito]
+    VAR _a = CALCULATE ( MAX ( dMetas[limite_alerta] ), dMetas[indicador] = "Atraso de Trânsito" )
+    RETURN IF ( ISBLANK ( _v ), "#8FA3BF", IF ( _v <= _m, "#3DD598", IF ( _v <= _a, "#F5A623", "#E5484D" ) ) )
+
+// ------------------------------ 07 Títulos dinâmicos ---------------------------
+MEASURE _Medidas[Texto Período] =
+    "Período: " & FORMAT ( MIN ( fViagens[data_saida_data] ), "dd/mm/yyyy" ) & " a "
+        & FORMAT ( MAX ( fViagens[data_saida_data] ), "dd/mm/yyyy" )
+MEASURE _Medidas[Texto Atualização] =
+    "Dados até " & FORMAT ( CALCULATE ( MAX ( fViagens[data_saida_data] ), ALL ( fViagens ) ), "dd/mm/yyyy" )
+
+EVALUATE
+ROW ( "Medidas", "ok" )

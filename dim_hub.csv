@@ -1,0 +1,5 @@
+hub_id,hub_nome,cidade,uf,latitude,longitude,docas
+HUB01,CD Guarulhos,Guarulhos,SP,-23.4543,-46.5333,24
+HUB02,CD Campinas,Campinas,SP,-22.9099,-47.0626,16
+HUB03,CD Santos,Santos,SP,-23.9608,-46.3336,12
+HUB04,CD Ribeirão Preto,Ribeirão Preto,SP,-21.1775,-47.8103,10

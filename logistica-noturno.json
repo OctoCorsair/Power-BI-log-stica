@@ -1,0 +1,41 @@
+{
+  "name": "Logística Noturno",
+  "dataColors": ["#F5A623", "#4EA8DE", "#2EC4B6", "#9B8CFF", "#E5484D", "#3DD598", "#FF7A59", "#8FA3BF"],
+  "background": "#13243B",
+  "foreground": "#E6EDF7",
+  "foregroundNeutralSecondary": "#8FA3BF",
+  "foregroundNeutralTertiary": "#5C7090",
+  "backgroundLight": "#1B3050",
+  "backgroundNeutral": "#243B5C",
+  "tableAccent": "#F5A623",
+  "good": "#3DD598",
+  "neutral": "#F5A623",
+  "bad": "#E5484D",
+  "maximum": "#E5484D",
+  "center": "#F5A623",
+  "minimum": "#3DD598",
+  "null": "#5C7090",
+  "hyperlink": "#4EA8DE",
+  "visitedHyperlink": "#9B8CFF",
+  "textClasses": {
+    "callout": { "fontSize": 28, "fontFace": "Segoe UI Semibold", "color": "#FFFFFF" },
+    "title": { "fontSize": 13, "fontFace": "Segoe UI Semibold", "color": "#E6EDF7" },
+    "header": { "fontSize": 12, "fontFace": "Segoe UI Semibold", "color": "#E6EDF7" },
+    "label": { "fontSize": 10, "fontFace": "Segoe UI", "color": "#8FA3BF" }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#0B1626" } }, "transparency": 0 }]
+      }
+    },
+    "*": {
+      "*": {
+        "border": [{ "show": false }],
+        "visualHeader": [{ "show": false }],
+        "background": [{ "show": true, "color": { "solid": { "color": "#13243B" } }, "transparency": 0 }],
+        "title": [{ "show": true, "fontColor": { "solid": { "color": "#E6EDF7" } }, "fontSize": 12, "alignment": "left" }]
+      }
+    }
+  }
+}
